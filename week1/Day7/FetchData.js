@@ -8,7 +8,7 @@ const fetchUserData = async () => {
             throw new Error(`Failed to fetch data. Status: ${response.status}`);
         }
         const data = await response.json();
-        console.log('Fetched Data:', data);
+        //console.log('Fetched Data:', data);
         
         const processedData = processUserData(data);
         const {femaleUser,femaleDescription} = processedData;

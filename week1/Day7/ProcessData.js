@@ -7,4 +7,4 @@ export const processUserData = ({users}) => {
     }
  
 };
-console.log(processUserData(data))
+//console.log(processUserData(data))
