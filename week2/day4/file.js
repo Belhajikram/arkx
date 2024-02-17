@@ -18,7 +18,6 @@ async function readCityFromFile() {
 }
 
 async function fetchData(city) {
-    const { lat, lng } = city;
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lng}&current_weather=true`;
     try {
         const response = await fetch(url);
@@ -35,6 +34,18 @@ async function fetchData(city) {
     }
 }
 
+async function writeCity(txt, cityName){
+    const pathLink = `./${cityName}.txt`
+    try {
+        await fs.access(pathLink, constants.F_OK)
+        await fs.unlink(pathLink)
+    } catch (error) {
+        console.log(`A file named ${cityName}.txt is created`)
+    }
+    await fs.writeFile(pathLink, txt)
+    console.log("the temperature is added")
+}
+
 async function main() {
     const city = await readCityFromFile(); 
     if (!city) {
@@ -42,7 +53,9 @@ async function main() {
         return;
     }
     const temperature = await fetchData(city); 
-    console.log(`City name: ${city.name}, Temperature: ${temperature}`);
+    const content =`City name: ${city.name}, Temperature: ${temperature}`;
+    console.log(city.name)
+    await writeCity(content, city.name)
 }
 
 main();

@@ -1,0 +1,1 @@
+City name: Cairo, Temperature: 16.7
